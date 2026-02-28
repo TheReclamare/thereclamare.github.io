@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TheReclamare — Canadian Public Data Dashboards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fafaf8;
+  --bg-white: #ffffff;
+  --border: #e4e2dd;
+  --border-light: #d4d1ca;
+  --text: #1a1a1a;
+  --text-muted: #5a5a5a;
+  --text-dim: #8a8a8a;
+  --accent: #b8860b;
+  --accent-light: rgba(184,134,11,0.08);
+  --accent-mid: rgba(184,134,11,0.15);
+  --red-muted: #8b3a3a;
+  --blue-muted: #2c5282;
+  --green-muted: #276749;
+  --purple-muted: #553c9a;
+  --teal-muted: #285e61;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'IBM Plex Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Hero ── */
+.hero {
+  min-height: 55vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 32px 60px;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-white);
+  border-bottom: 1px solid var(--border);
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 40%, rgba(184,134,11,0.04), transparent),
+    radial-gradient(ellipse 60% 50% at 80% 30%, rgba(44,82,130,0.03), transparent);
+  pointer-events: none;
+}
+.hero-inner {
+  position: relative;
+  max-width: 720px;
+}
+.hero .tag {
+  display: inline-block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 20px;
+  padding: 6px 16px;
+  border: 1px solid var(--accent);
+  border-radius: 100px;
+  animation: fadeUp 0.6s ease both;
+}
+.hero h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--text);
+  margin-bottom: 20px;
+  animation: fadeUp 0.6s ease 0.1s both;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--accent);
+}
+.hero p {
+  font-size: 17px;
+  color: var(--text-muted);
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.7;
+  animation: fadeUp 0.6s ease 0.2s both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Project Grid ── */
+.projects-section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 64px 32px 80px;
+}
+.projects-section .section-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+.projects-section h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 40px;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+@media (max-width: 700px) { .project-grid { grid-template-columns: 1fr; } }
+
+.project-card {
+  background: var(--bg-white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 32px;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+  animation: fadeUp 0.5s ease both;
+}
+.project-card:nth-child(1) { animation-delay: 0.05s; }
+.project-card:nth-child(2) { animation-delay: 0.1s; }
+.project-card:nth-child(3) { animation-delay: 0.15s; }
+.project-card:nth-child(4) { animation-delay: 0.2s; }
+.project-card:nth-child(5) { animation-delay: 0.25s; }
+
+.project-card:hover {
+  border-color: var(--border-light);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+  transform: translateY(-3px);
+}
+
+/* Featured card spans full width */
+.project-card.featured {
+  grid-column: 1 / -1;
+  flex-direction: row;
+  align-items: center;
+  gap: 32px;
+  border-color: var(--accent);
+  border-width: 1.5px;
+  background: linear-gradient(135deg, var(--bg-white) 0%, rgba(184,134,11,0.02) 100%);
+}
+.project-card.featured .card-badge {
+  background: var(--accent);
+  color: #fff;
+}
+@media (max-width: 700px) {
+  .project-card.featured { flex-direction: column; }
+}
+
+.card-icon {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  margin-bottom: 16px;
+  flex-shrink: 0;
+}
+.project-card.featured .card-icon {
+  width: 64px; height: 64px;
+  font-size: 28px;
+  margin-bottom: 0;
+}
+
+.card-badge {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 4px;
+  background: var(--accent-light);
+  color: var(--accent);
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.card-content { flex: 1; }
+
+.card-content h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.project-card.featured .card-content h3 {
+  font-size: 24px;
+}
+
+.card-content p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.card-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.card-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  background: var(--bg);
+  padding: 3px 10px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+
+.card-arrow {
+  position: absolute;
+  top: 28px; right: 28px;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.25s;
+  color: var(--text-dim);
+}
+.project-card:hover .card-arrow {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  transform: translate(2px, -2px);
+}
+
+/* ── Footer ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 40px 32px;
+  text-align: center;
+  background: var(--bg-white);
+}
+footer p {
+  font-size: 13px;
+  color: var(--text-dim);
+  max-width: 600px;
+  margin: 0 auto;
+}
+footer a {
+  color: var(--accent);
+  text-decoration: none;
+}
+footer a:hover { text-decoration: underline; }
+footer .gh-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 6px 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+footer .gh-link:hover {
+  border-color: var(--border-light);
+  color: var(--text);
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="tag">Open Data · Public Accountability</div>
+    <h1>Following the <em>Public Dollar</em></h1>
+    <p>Interactive dashboards exploring Canadian government spending, travel, hospitality, and Indigenous community investment — built from open data to make public information accessible.</p>
+  </div>
+</div>
+
+<div class="projects-section">
+  <div class="section-label">Dashboards</div>
+  <h2>Explore the Data</h2>
+
+  <div class="project-grid">
+
+    <!-- Featured: Travel Expenses (newest) -->
+    <a class="project-card featured" href="/Canadian-Government-Travel-Expenses/">
+      <div class="card-icon" style="background:var(--accent-mid);color:var(--accent);">✈</div>
+      <div class="card-content">
+        <div class="card-badge" style="background:var(--accent);color:#fff;">Latest</div>
+        <h3>Canadian Government Travel Expenses</h3>
+        <p>106,000+ travel expense disclosures from 140 federal departments spanning 2015–2025. Searchable by minister, department, destination, and purpose — with per-year Top 10 rankings and full cost breakdowns. $226M in total disclosed spending.</p>
+        <div class="card-tags">
+          <span class="card-tag">106K Records</span>
+          <span class="card-tag">2015–2025</span>
+          <span class="card-tag">Searchable</span>
+          <span class="card-tag">140 Departments</span>
+        </div>
+      </div>
+      <div class="card-arrow">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+      </div>
+    </a>
+
+    <!-- Government Spending -->
+    <a class="project-card" href="/CDN_Govt_Spending/">
+      <div class="card-icon" style="background:rgba(44,82,130,0.08);color:var(--blue-muted);">📊</div>
+      <div class="card-content">
+        <div class="card-badge">Federal</div>
+        <h3>Canadian Government Spending</h3>
+        <p>Federal government expenditure data across departments and programs from 2015 to 2025. Track how taxpayer dollars are allocated across the public service.</p>
+        <div class="card-tags">
+          <span class="card-tag">2015–2025</span>
+          <span class="card-tag">Federal</span>
+        </div>
+      </div>
+      <div class="card-arrow">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+      </div>
+    </a>
+
+    <!-- BC Spending -->
+    <a class="project-card" href="/BC-Govt-Spending-2015-2025/">
+      <div class="card-icon" style="background:rgba(39,103,73,0.08);color:var(--green-muted);">🏔</div>
+      <div class="card-content">
+        <div class="card-badge">Provincial</div>
+        <h3>BC Government Spending</h3>
+        <p>British Columbia provincial spending data from 2015 to 2025. Explore how the province allocates its budget across ministries and services.</p>
+        <div class="card-tags">
+          <span class="card-tag">2015–2025</span>
+          <span class="card-tag">British Columbia</span>
+        </div>
+      </div>
+      <div class="card-arrow">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+      </div>
+    </a>
+
+    <!-- Hospitality -->
+    <a class="project-card" href="/CDN_Govt_Hospitality/">
+      <div class="card-icon" style="background:rgba(85,60,154,0.08);color:var(--purple-muted);">🍽</div>
+      <div class="card-content">
+        <div class="card-badge">Federal</div>
+        <h3>Canadian Government Hospitality</h3>
+        <p>Federal hospitality expense disclosures — events, meals, receptions, and entertainment costs incurred by government officials and departments.</p>
+        <div class="card-tags">
+          <span class="card-tag">Hospitality</span>
+          <span class="card-tag">Federal</span>
+        </div>
+      </div>
+      <div class="card-arrow">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+      </div>
+    </a>
+
+    <!-- First Nation Wealth -->
+    <a class="project-card" href="/cdn-fn-wealth/">
+      <div class="card-icon" style="background:rgba(40,94,97,0.08);color:var(--teal-muted);">🌿</div>
+      <div class="card-content">
+        <div class="card-badge">Indigenous</div>
+        <h3>Canadian First Nation Wealth</h3>
+        <p>Data exploring wealth, investment, and economic indicators for First Nation communities across Canada. Tracking resources and outcomes for Indigenous peoples.</p>
+        <div class="card-tags">
+          <span class="card-tag">First Nations</span>
+          <span class="card-tag">Economic Data</span>
+        </div>
+      </div>
+      <div class="card-arrow">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<footer>
+  <p>All dashboards are built from publicly available Canadian government open data. Figures are as-published and for informational purposes.</p>
+  <a class="gh-link" href="https://github.com/TheReclamare" target="_blank" rel="noopener">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+    TheReclamare
+  </a>
+</footer>
+
+</body>
+</html>
