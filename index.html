@@ -126,49 +126,48 @@ body {
 }
 
 .project-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
-@media (max-width: 700px) { .project-grid { grid-template-columns: 1fr; } }
 
 .project-card {
   background: var(--bg-white);
   border: 1px solid var(--border);
   border-radius: 14px;
-  padding: 32px;
+  padding: 28px 32px;
   text-decoration: none;
   color: inherit;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
+  gap: 28px;
   position: relative;
   overflow: hidden;
   transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
   animation: fadeUp 0.5s ease both;
 }
-.project-card:nth-child(1) { animation-delay: 0.05s; }
-.project-card:nth-child(2) { animation-delay: 0.1s; }
-.project-card:nth-child(3) { animation-delay: 0.15s; }
-.project-card:nth-child(4) { animation-delay: 0.2s; }
-.project-card:nth-child(5) { animation-delay: 0.25s; }
-.project-card:nth-child(6) { animation-delay: 0.3s; }
-.project-card:nth-child(7) { animation-delay: 0.35s; }
-.project-card:nth-child(8) { animation-delay: 0.40s; }
-.project-card:nth-child(9) { animation-delay: 0.45s; }
+.project-card:nth-child(1)  { animation-delay: 0.05s; }
+.project-card:nth-child(2)  { animation-delay: 0.10s; }
+.project-card:nth-child(3)  { animation-delay: 0.15s; }
+.project-card:nth-child(4)  { animation-delay: 0.20s; }
+.project-card:nth-child(5)  { animation-delay: 0.25s; }
+.project-card:nth-child(6)  { animation-delay: 0.30s; }
+.project-card:nth-child(7)  { animation-delay: 0.35s; }
+.project-card:nth-child(8)  { animation-delay: 0.40s; }
+.project-card:nth-child(9)  { animation-delay: 0.45s; }
 .project-card:nth-child(10) { animation-delay: 0.50s; }
+.project-card:nth-child(11) { animation-delay: 0.55s; }
+.project-card:nth-child(12) { animation-delay: 0.60s; }
 
 .project-card:hover {
   border-color: var(--border-light);
   box-shadow: 0 8px 32px rgba(0,0,0,0.06);
-  transform: translateY(-3px);
+  transform: translateY(-2px);
 }
 
-/* Featured card spans full width */
+/* Featured = highlighted accent border, subtle tinted background */
 .project-card.featured {
-  grid-column: 1 / -1;
-  flex-direction: row;
-  align-items: center;
-  gap: 32px;
   border-color: var(--accent);
   border-width: 1.5px;
   background: linear-gradient(135deg, var(--bg-white) 0%, rgba(184,134,11,0.02) 100%);
@@ -177,8 +176,9 @@ body {
   background: var(--accent);
   color: #fff;
 }
-@media (max-width: 700px) {
-  .project-card.featured { flex-direction: column; }
+
+@media (max-width: 640px) {
+  .project-card { flex-direction: column; align-items: flex-start; }
 }
 
 /* Featured stat strip */
@@ -208,18 +208,11 @@ body {
 }
 
 .card-icon {
-  width: 48px; height: 48px;
-  border-radius: 12px;
+  width: 60px; height: 60px;
+  border-radius: 14px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 22px;
-  margin-bottom: 16px;
+  font-size: 26px;
   flex-shrink: 0;
-}
-.project-card.featured .card-icon {
-  width: 72px; height: 72px;
-  font-size: 32px;
-  border-radius: 16px;
-  margin-bottom: 0;
 }
 
 .card-badge {
@@ -240,14 +233,11 @@ body {
 
 .card-content h3 {
   font-family: 'DM Serif Display', serif;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 400;
   color: var(--text);
   margin-bottom: 8px;
   line-height: 1.3;
-}
-.project-card.featured .card-content h3 {
-  font-size: 26px;
 }
 
 .card-content p {
@@ -345,7 +335,44 @@ footer .gh-link:hover {
 
   <div class="project-grid">
 
-    <!-- Featured: Canadian International Assistance (newest) -->
+    <!-- Canada Energy Future 2026 — NEW -->
+    <a class="project-card featured" href="https://thereclamare.github.io/Canada_Energy_Future/">
+      <div class="card-icon" style="background:rgba(184,134,11,0.12);color:var(--accent);">⚡</div>
+      <div class="card-content">
+        <div class="card-badge" style="background:var(--accent);color:#fff;">New · April 2026</div>
+        <h3>Canada's Energy Future 2026</h3>
+        <p>Interactive energy supply and demand projections to 2050 from the Canada Energy Regulator — four scenarios exploring how Canada's energy system could evolve under different economic and climate pathways. Filter by province, year range, and compare all four forecasts side by side.</p>
+        <div class="feat-stats">
+          <div class="feat-stat"><span class="feat-stat-val" style="color:var(--accent);">4</span><span class="feat-stat-lbl">Scenarios</span></div>
+          <div class="feat-stat"><span class="feat-stat-val" style="color:var(--accent);">2005–2050</span><span class="feat-stat-lbl">Coverage</span></div>
+          <div class="feat-stat"><span class="feat-stat-val" style="color:var(--accent);">4</span><span class="feat-stat-lbl">Energy Metrics</span></div>
+          <div class="feat-stat"><span class="feat-stat-val" style="color:var(--accent);">13</span><span class="feat-stat-lbl">Provinces & Territories</span></div>
+        </div>
+      </div>
+      <div class="card-arrow">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+      </div>
+    </a>
+
+    <!-- BC Socioeconomic -->
+    <a class="project-card" href="https://thereclamare.github.io/BC_Socioeconomic/">
+      <div class="card-icon" style="background:rgba(39,103,73,0.08);color:var(--green-muted);">🏔</div>
+      <div class="card-content">
+        <div class="card-badge" style="background:var(--green-muted);color:#fff;">New · April 2026</div>
+        <h3>BC Socioeconomic Dashboard</h3>
+        <p>Socioeconomic indicators across British Columbia — exploring population, income, employment, and community-level data across the province's regions and municipalities.</p>
+        <div class="card-tags">
+          <span class="card-tag">British Columbia</span>
+          <span class="card-tag">Provincial</span>
+          <span class="card-tag">Socioeconomic</span>
+        </div>
+      </div>
+      <div class="card-arrow">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+      </div>
+    </a>
+
+    <!-- Featured: Canadian International Assistance -->
     <a class="project-card featured" href="/Canadian_International_Assistance/">
       <div class="card-icon" style="background:rgba(44,82,130,0.1);color:var(--blue-muted);">🌍</div>
       <div class="card-content">
