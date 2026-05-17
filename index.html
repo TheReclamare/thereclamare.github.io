@@ -280,6 +280,194 @@ body {
   transform: translate(2px, -2px);
 }
 
+/* ── Spotlight (featured document) ── */
+.spotlight-section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 56px 32px 32px;
+}
+.spotlight-section .section-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+.spotlight-section h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 24px;
+}
+
+.spotlight {
+  position: relative;
+  background: var(--bg-white);
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--red-muted);
+  border-radius: 14px;
+  padding: 56px 56px 48px;
+  overflow: hidden;
+  transition: box-shadow 0.3s, transform 0.3s;
+  animation: fadeUp 0.6s ease both;
+}
+.spotlight::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 90% 10%, rgba(139,58,58,0.06), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 0% 100%, rgba(139,58,58,0.04), transparent 60%);
+  pointer-events: none;
+}
+.spotlight > * { position: relative; }
+
+.spotlight-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--red-muted);
+  margin-bottom: 18px;
+  padding: 5px 14px;
+  border: 1px solid var(--red-muted);
+  border-radius: 100px;
+  background: rgba(139,58,58,0.05);
+}
+
+.spotlight h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(34px, 5vw, 52px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text);
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+.spotlight .spotlight-sub {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic;
+  font-size: clamp(17px, 2vw, 22px);
+  color: var(--red-muted);
+  margin-bottom: 28px;
+  font-weight: 400;
+}
+
+.spotlight-lead {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 760px;
+  margin-bottom: 36px;
+}
+
+.spotlight-quantum {
+  padding: 28px 0 26px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 32px;
+  text-align: center;
+}
+.spotlight-quantum-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+.spotlight-quantum-amount {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(48px, 9vw, 96px);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--red-muted);
+  letter-spacing: -0.025em;
+  margin-bottom: 6px;
+  font-variant-numeric: tabular-nums;
+}
+.spotlight-quantum-words {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic;
+  font-size: 15px;
+  color: var(--text-muted);
+}
+
+.spotlight-meta {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  margin-bottom: 40px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.spotlight-meta-item {
+  padding: 18px 20px;
+  background: var(--bg);
+  border-right: 1px solid var(--border);
+}
+.spotlight-meta-item:last-child { border-right: none; }
+.spotlight-meta-val {
+  font-family: 'DM Serif Display', serif;
+  font-size: 26px;
+  color: var(--text);
+  font-weight: 400;
+  line-height: 1;
+  margin-bottom: 6px;
+  display: block;
+}
+.spotlight-meta-lbl {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.spotlight-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 28px;
+  background: var(--text);
+  color: var(--bg-white);
+  text-decoration: none;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border-radius: 6px;
+  transition: all 0.25s;
+}
+.spotlight-cta:hover {
+  background: var(--red-muted);
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--text);
+}
+.spotlight-cta svg {
+  transition: transform 0.25s;
+}
+.spotlight-cta:hover svg {
+  transform: translate(3px, -3px);
+}
+
+@media (max-width: 768px) {
+  .spotlight { padding: 32px 24px; }
+  .spotlight-meta { grid-template-columns: repeat(2, 1fr); }
+  .spotlight-meta-item:nth-child(2) { border-right: none; }
+  .spotlight-meta-item:nth-child(1),
+  .spotlight-meta-item:nth-child(2) { border-bottom: 1px solid var(--border); }
+}
+
 /* ── Footer ── */
 footer {
   border-top: 1px solid var(--border);
@@ -327,6 +515,49 @@ footer .gh-link:hover {
     <p>These dashboards are an attempt to make sense of the gobbledygook.</p>
 
   </div>
+</div>
+
+<div class="spotlight-section">
+  <div class="section-label">Latest</div>
+  <h2>Featured Document</h2>
+
+  <a class="spotlight" href="https://thereclamare.github.io/Statement_of_Claim/" style="display:block;text-decoration:none;color:inherit;">
+    <div class="spotlight-tag">⚖ &nbsp;New · May 2026</div>
+    <h3>Statement of Claim</h3>
+    <div class="spotlight-sub">A citizen class action against the Crown and Indigenous nations asserting Aboriginal title.</div>
+
+    <p class="spotlight-lead">A national class-action pleading drafted on behalf of every Canadian citizen, ratepayer, and registered title holder. The pleading takes the doctrines that produced <em>Cowichan Tribes v Canada</em> (2025 BCSC 1490) — negligent misrepresentation, breach of fiduciary duty, the honour of the Crown, unjust enrichment, approbation and reprobation, restitution for improvements — and applies them uniformly to the citizen side. The numbers are what the doctrine produces when applied on its own terms.</p>
+
+    <div class="spotlight-quantum">
+      <div class="spotlight-quantum-label">The Plaintiffs Claim</div>
+      <div class="spotlight-quantum-amount">$4,400,000,000,000</div>
+      <div class="spotlight-quantum-words">Four trillion four hundred billion dollars in lawful money of Canada</div>
+    </div>
+
+    <div class="spotlight-meta">
+      <div class="spotlight-meta-item">
+        <span class="spotlight-meta-val">39</span>
+        <span class="spotlight-meta-lbl">Articles</span>
+      </div>
+      <div class="spotlight-meta-item">
+        <span class="spotlight-meta-val">1670–2025</span>
+        <span class="spotlight-meta-lbl">Period Pleaded</span>
+      </div>
+      <div class="spotlight-meta-item">
+        <span class="spotlight-meta-val">17+</span>
+        <span class="spotlight-meta-lbl">Named Defendants</span>
+      </div>
+      <div class="spotlight-meta-item">
+        <span class="spotlight-meta-val">NIL</span>
+        <span class="spotlight-meta-lbl">Counter-liability</span>
+      </div>
+    </div>
+
+    <span class="spotlight-cta">
+      Read the Pleading
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+    </span>
+  </a>
 </div>
 
 <div class="projects-section">
